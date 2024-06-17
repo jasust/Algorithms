@@ -1,4 +1,0 @@
-http://www.ibr.cs.tu-bs.de/courses/ss98/audii/applets/BST/Treap-Example.html
-
-
-http://www.it.uu.se/edu/course/homepage/datastrMN1/TreapDemo/TreapDemo.html
