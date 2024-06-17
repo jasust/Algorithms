@@ -1,0 +1,73 @@
+/*
+  Dat je niz brojeva i upiti nad nizom.
+  Svaki upit je tipa l, r i treba odrediti
+  maksimalnu sumu uzastopnih brojeva, ciji
+  su indeksi veci od l a manji od r.
+*/
+
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+const int MaxN = 131072 + 30;
+
+struct node
+{
+  int l, r, s, max;
+};
+
+struct custom
+{
+  node tree[ 2 * MaxN ];
+  void make( int idx, int levi, int desni, const int niz[] )
+  {
+    if ( levi == desni )
+    {
+      tree[ idx ].l = niz[ levi ];
+      tree[ idx ].r = niz[ levi ];
+      tree[ idx ].s = niz[ levi ];
+      tree[ idx ].max = niz[ levi ];
+      return;
+    }
+    int mid = ( levi + desni ) / 2;
+    make( 2 * idx, levi, mid, niz );
+    make( 2 * idx + 1, mid + 1, desni, niz );
+    tree[ idx ].l = max( tree[ 2 * idx ].l, tree[ 2 * idx ].s + tree[ 2 * idx + 1 ].l );
+    tree[ idx ].r = max( tree[ 2 * idx + 1 ].r, tree[ 2 * idx + 1 ].s + tree[ 2 * idx ].r );
+    tree[ idx ].s = tree[ 2 * idx ].s + tree[ 2 * idx + 1 ].s;
+    tree[ idx ].max = max( max( tree[ 2 * idx ].max, tree[ 2 * idx + 1 ].max ), tree[ 2 * idx ].r + tree[ 2 * idx + 1 ].l );
+  }
+  node get( int idx, int levi, int desni, int a, int b )
+  {
+    if ( a <= levi && desni <= b ) return tree[ idx ];
+    int mid = ( levi + desni ) / 2;
+    if ( b <= mid ) return get( 2 * idx, levi, mid, a, b );
+    if ( a > mid ) return get( 2 * idx + 1, mid + 1, desni, a, b );
+    node idiL, idiD, ret;
+    idiL = get( 2 * idx, levi, mid, a, b );
+    idiD = get( 2 * idx + 1, mid + 1, desni, a, b );
+    ret.l = max( idiL.l, idiL.s + idiD.l );
+    ret.r = max( idiD.r, idiD.s + idiL.r );
+    ret.s = idiL.s + idiD.s;
+    ret.max = max( max( idiL.max, idiD.max ), idiL.r + idiD.l );
+    return ret;
+  }
+} segment_tree;
+
+int n, a[ MaxN ], Q;
+
+int main()
+{
+  scanf( "%d", &n );
+  for ( int i = 0; i < n; i++ ) scanf( "%d", &a[ i ] );
+  segment_tree.make( 1, 0, n - 1, a );
+  scanf( "%d", &Q );
+  while ( Q-- )
+  {
+    int x, y;
+    scanf( "%d %d", &x, &y );
+    printf( "%d\n", segment_tree.get( 1, 0, n - 1, --x, --y ).max );
+  }
+  return 0;
+}

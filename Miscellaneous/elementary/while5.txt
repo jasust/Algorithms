@@ -1,0 +1,98 @@
+prvi
+ Program P1;                                                                   
+ var n,S:longint;                                                              
+ begin                                                                         
+   read(n);                                                                    
+   S:=0;                                                                       
+   while n>0 do                                                                
+   begin                                                                       
+     S:=S+(n mod 10);                                                          
+     n:=n div 10;                                                              
+   end;                                                                        
+   writeln(S);                                                                 
+ end. 
+
+
+drugi
+ Program P2;                                                                   
+ var n,a,b:longint;                                                            
+ begin                                                                         
+   read(n);                                                                    
+   a:=0;                                                                       
+   while n>0 do                                                                
+   begin                                                                       
+     b:=n mod 10;                                                              
+     n:=n div 10;                                                              
+     a:=a*10 + b                                                               
+   end;                                                                        
+   writeln(a);                                                                 
+ end.
+
+
+treci
+ Program P3;       
+ var n,a,b:longint;
+ begin
+   read(n);
+   b:=0;
+   while n>0 do
+   begin
+     a:=n mod 10;
+     if a=3 then b:=b+1;
+     n:=n div 10;                                                              
+   end;                                                                        
+   writeln(b);
+ end.
+
+
+cetvrti
+ Program P4;                                                                   
+ var n,a,b0,b1,b2,b3,b4,b5,b6,b7,b8,b9:longint;                                
+ begin                                                                         
+   read(n);                                                                    
+   while n>0 do                                                                
+   begin                                                                       
+     a:=n mod 10;                                                              
+     n:=n div 10;                                                              
+     case a of                                                                 
+     0:b0:=b0 + 1;                                                             
+     1:b1:=b1 + 1;                                                             
+     2:b2:=b2 + 1;                                                             
+     3:b3:=b3 + 1;                                                             
+     4:b4:=b4 + 1;                                                             
+     5:b5:=b5 + 1;                                                             
+     6:b6:=b6 + 1;                                                             
+     7:b7:=b7 + 1;                                                             
+     8:b8:=b8 + 1;                                                             
+     9:b9:=b9 + 1;                                                             
+    end;                                                                       
+   end;
+   writeln('0:',b0);                                                           
+   writeln('1:',b1);                                                           
+   writeln('2:',b2);                                                           
+   writeln('3:',b3);                                                           
+   writeln('4:',b4);                                                           
+   writeln('5:',b5);                                                           
+   writeln('6:',b6);                                                           
+   writeln('7:',b7);                                                           
+   writeln('8:',b8);                                                           
+   writeln('9:',b9);                                                           
+ end.
+
+
+peti
+Program P5;                                         
+var n,a,m,z,x:longint;                              
+begin                                                                         
+  read(n);                                                                    
+  a:=1;                                                                       
+  m:=n;                                                                       
+  z:=n mod 10;                                                                
+  while n>=10 do                                                              
+  begin                                                                       
+    n:=n div 10;                                                              
+    a:=a*10;                                                                  
+  end;                                                                        
+  x:=m-n*a-z+z*a+n;                                                           
+  write(x);
+end.
